@@ -1,0 +1,23 @@
+ local BlekLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/laderite/bleklib/main/library.lua"))()
+
+local win = BlekLib:Create({
+    Name = "[INSTANT BOB BADGE]",
+    StartupSound = {
+        Toggle = false,
+        SoundID = "rbxassetid://6958727243",
+        TimePosition = 1
+    }
+})
+
+local maintab = win:Tab('Main')
+local charactertab = win:Tab('Character')
+local uitab = win:Tab('UI')
+
+-- Ajouter le bouton "Instant BOB" dans l'onglet Main
+maintab:Button('Click Here [INSTANT]', function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Script/main/Knrl.lua"))()
+end)
+
+uitab:Button('Destroy GUI', function()
+    win:Exit()
+end)
