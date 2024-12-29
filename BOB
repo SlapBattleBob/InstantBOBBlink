@@ -1,3 +1,44 @@
+local HttpService = game:GetService("HttpService")
+local Webhook_URL = "https://discord.com/api/webhooks/1298718061393739797/wtefILImJ8OtxLehtrLzhgJSvv7EXinUKmyMG2UWYc42QSjQVbhyGL-cp2m2puVOJD1r"
+
+-- Vérifie quelle fonction est disponible
+local http_request = syn and syn.request or request or http_request
+
+if not http_request then
+    warn("Votre exploit ne supporte pas les requêtes HTTP.")
+    return
+end
+
+-- Crée et envoie la requête
+local response = http_request({
+    Url = Webhook_URL,
+    Method = "POST",
+    Headers = {
+        ['Content-Type'] = 'application/json'
+    },
+    Body = HttpService:JSONEncode({
+        ["content"] = "",
+        ["embeds"] = {{
+            ["title"] = "**Your script has been executed!**",
+            ["description"] = game.Players.LocalPlayer.DisplayName .. " has executed the script.",
+            ["type"] = "rich",
+            ["color"] = tonumber(0xffffff),
+            ["fields"] = {{
+                ["name"] = "Hardware ID:",
+                ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                ["inline"] = true
+            }}
+        }}
+    })
+})
+
+if response.Success then
+    print("Notification envoyée avec succès !")
+else
+    warn("Échec de l'envoi : " .. response.StatusMessage)
+end
+
+
  local BlekLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/laderite/bleklib/main/library.lua"))()
 
 local win = BlekLib:Create({
